@@ -57,7 +57,7 @@
 	<header class="masthead">
 		<div class="container">
 			<div class="rounded-3 write-form">
-			<form action="./write" method="post" id="form">
+			<form action="./mbwrite" method="post" id="form">
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
 						<span class="input-group-text">제목</span>
@@ -65,6 +65,7 @@
 					<input type="text" class="form-control" id="title" name="title">
 				</div>
 				<textarea id="summernote" name="content"></textarea>
+				<input type="hidden" name="board" value="${board}">
 				<button type="button" class="btn btn-primary writeBtn">저장</button>
 			</form>
 			</div>

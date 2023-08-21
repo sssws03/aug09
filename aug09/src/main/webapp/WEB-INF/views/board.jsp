@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>board</title>
-	<!-- Core theme CSS (includes Bootstrap)-->
+<title> ❤ board</title>
     <link href="css/styles.css" rel="stylesheet" />
     <script src="./js/jquery-3.7.0.min.js"></script>
 	<style type="text/css">
@@ -34,67 +33,63 @@
 		}
 		.detail-content{
 			width: 100%;
+			min-height: 500px;
+			height:calc(100vh - 230px);
 			height: auto;
 		}
 	</style>
 	<script type="text/javascript">
 	$(function(){
 		$(document).on("click", ".del", function(){
-			
-			//기상 form만들어서 전송하기
+			//가상 form만들어서 전송하기
 			let form = $('<form></form>');
 			form.attr('action', './delete');
 			form.attr("method", "post");
 			
-			form.append($("<input>",{type:'hidden', name:"bno", value:$(".bno").val()}));
-			form.append($("<input>",{type:'hidden', name:"uuid", value:$(".uuid").val()}));
+			form.append($("<input>", {type:'hidden', name:"bno", value:$(".bno").val()}));
+			form.append($("<input>", {type:'hidden', name:"uuid", value:$(".uuid").val()}));
 			
 			form.appendTo("body");
 			form.submit();
 		});
 		
 		$(document).on("click", ".edit", function(){
-			let bno= $(".bno").val();
-			let uuid= $(".uuid").val();
-			alert(bno + "/" +uuid);
+			let bno = $(".bno").val();
+			let uuid = $(".uuid").val();
+			alert(bno + " / " + uuid);
 		});
+		
+		
 		$(".detail").click(function(){
 			let bno = $(this).children("td").eq(0).html();
 			let title = $(this).children("td").eq(1).text();
 			let name = $(this).children("td").eq(2).html();
 			let date = $(this).children("td").eq(3).html();
-			let read = Number($(this).children("td").eq(4).html()) +1;
+			let read = Number($(this).children("td").eq(4).html()) + 1;
 			let comment =  $(this).children("td").eq(1).children(".bg-secondary").text().length+1;
-			if(comment > 0){
-				title = title.slice(0, -comment);
-			}
+			if(comment > 0){title = title.slice(0, -comment);}
 			//alert(first.text());
 			//$(".modal-bno").text(bno + "/" + name + "/" + read);
-			
+
 			$.ajax({
 				url:"./detail",
 				type: "post",
-				data: {bno:bno},
+				data: {bno: bno},
 				dataType: "json",
 				success:function(data){
 					//alert(data.content);
-			$(".modal-title").text(title);
-			name = name + '<img class="" src="./img/edit.png"> <img class="del" src="./img/delete.png">';
-			name += '<input type="hidden" class="bno" value="'+bno+'">';
-			name += '<input type="hidden" class="uuid" value="'+data.uuid+'">';
-			$(".detail-name").html(name);
-			$(".detail-date").text(date);
-			$(".detail-read").text(read);
-			$(".detail-content").html(data.content);
-			$("#exampleModal").modal("show");
-			
+					$(".modal-title").text(title);
+					name = name + '<img class="" src="./img/edit.png"> <img class="del" src="./img/delete.png">';
+					name += '<input type="hidden" class="bno" value="'+bno+'">';
+					name += '<input type="hidden" class="uuid" value="'+data.uuid+'">';
+					$(".detail-name").html(name);
+					$(".detail-date").text(date);
+					$(".detail-read").text(data.ip+" / "+read);
+					$(".detail-content").html(data.content);
+					$("#exampleModal").modal("show");
 				},
-				error:function(error){
-					alert("에러가 발생했습니다. 다시 시도하지 마십시오.");
-				}
+				error:function(error){alert("에러가 발생했습니다. 다시 시도하지 마십시오.");}
 			});
-			
-			
 		});
 		//$(".modalOpen").click(function(){$("#exampleModal").modal("show");});
 	});
@@ -127,9 +122,6 @@
                		</tbody>
                </table>
                <button type="button" class="btn btn-secondary" onclick="location.href='./write'">글쓰기</button>
-               <button type="button" id="modal1" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">모달</button>
-               <button type="button" class="modalOpen btn btn-light">모달열기</button>
-               
             </div>
         </header>
 
@@ -143,15 +135,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      	<div class="detail-detail">
+      	<div class="detail-deail">
       		 <div class="detail-name">이름</div>
       		 <div class="detail-date-read">
       		 	<div class="detail-date">날짜</div>
       		 	<div class="detail-read">읽음</div>
       		 </div>
       		 <div class="detail-content">본문내용</div>
-      	</div>
-		 
+      	</div>  
       </div>
     </div>
   </div>
@@ -161,7 +152,7 @@
 
 
 
-        <!-- Bootstrap core JS-->
+       <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
