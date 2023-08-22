@@ -2,21 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sssws03.web.dao.AdminDAO">
 
-	<select id="adminLogin" resultType="Map">
+	<select id="adminLogin" resultType="Map" >
+	<![CDATA[
 		SELECT
 		count(*) as count, m_name, m_grade
 		FROM members
 		WHERE m_id = #{id} AND m_pw=#{pw}
+		]]>
 	</select>
-
+	<!-- SELECT 수정하지 말기 -->
+	
 	<select id="list" resultType="Map">
 	SELECT * FROM notice ORDER BY nno DESC
 	</select>
 	
 	<insert id="noticeWrite" parameterType="Map">
 		INSERT INTO notice(ntitle, ncontent, m_no
-			<if test="upFile != null and upFile != ''">, norifile</if>)
+			<if test="upFile != null and upFile != ''">, norifile, nrealfile</if>)
 		VALUES (#{title}, #{content}, #{mno}
-			<if test="upFile != null and upFile != ''">, #{upFile}</if>)
+			<if test="upFile != null and upFile != ''">, #{upFile}, #{realFile}</if>)
 	</insert>
 </mapper>

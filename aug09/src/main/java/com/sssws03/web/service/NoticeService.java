@@ -10,12 +10,21 @@ import com.sssws03.web.dao.NoticeDAO;
 
 @Service
 public class NoticeService {
-	
+
 	@Autowired
 	private NoticeDAO noticeDAO;
 
 	public List<Map<String, Object>> list() {
-		List<Map<String, Object>> list = noticeDAO.list(); 
+		List<Map<String, Object>> list = noticeDAO.list();
 		return list;
 	}
+
+	public Map<String, Object> detail(int nno) {
+		return noticeDAO.detail(nno);
+	}
+
+	public String getOriFileName(String fileName) {
+		return noticeDAO.getOriFileName(fileName);
+	}
+
 }
