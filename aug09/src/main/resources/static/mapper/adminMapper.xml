@@ -21,5 +21,20 @@
 			<if test="upFile != null and upFile != ''">, norifile, nrealfile</if>)
 		VALUES (#{title}, #{content}, #{mno}
 			<if test="upFile != null and upFile != ''">, #{upFile}, #{realFile}</if>)
+			
 	</insert>
+	<select id="noticeDetail" parameterType="Integer" resultType="String">
+		SELECT ncontent FROM notice WHERE nno=#{nno}
+	</select>
+	
+	<update id="noticeHide" parameterType="Integer">
+		UPDATE notice SET ndel = if(ndel= 1,0,1)
+		WHERE nno=#{nno}
+	</update>
+	
+	<select id="setupBoardList" resultType="Map">
+		SELECT *
+		FROM setupboard ORDER BY b_no ASC
+	</select>
+	
 </mapper>

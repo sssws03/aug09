@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sssws03.web.dao.MultiBoardDAO;
+
 @Service
 public class MultiBoardService {
+
 	@Autowired
 	private MultiBoardDAO mbDAO;
 
@@ -22,6 +24,10 @@ public class MultiBoardService {
 
 	public Map<String, Object> mbdetail(int mbno) {
 		return mbDAO.mbdetail(mbno);
+	}
+
+	public List<Map<String, Object>> boardlist() {
+		return mbDAO.boardlist();
 	}
 
 }

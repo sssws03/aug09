@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> ❤ 글쓰기</title>
+<title> ❤ admin:: notice detail </title>
 <link href="css/styles.css" rel="stylesheet" />
 <script src="./js/jquery-3.7.0.min.js"></script>
 <style type="text/css">

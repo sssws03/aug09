@@ -35,4 +35,8 @@ public class BoardService {
 		return boardDAO.write(dto);
 	}
 
+	public BoardDTO detail2(int bno) {
+		return boardDAO.detail2(bno);
+	}
+
 }

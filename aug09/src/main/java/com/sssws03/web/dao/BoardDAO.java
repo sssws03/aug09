@@ -17,4 +17,6 @@ public interface BoardDAO {
 	int write(BoardDTO dto);
 
 	void readUP(int bno);
+
+	BoardDTO detail2(int bno);
 }

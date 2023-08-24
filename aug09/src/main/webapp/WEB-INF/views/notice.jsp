@@ -65,18 +65,15 @@
                		<tbody><c:forEach items="${list }" var="row">
                		<tr class="row detail" onclick="location.href='./noticeDetail?nno=${row.nno}'">
                			<td class="col-1">${row.nno}</td>
-               			<td class="col-5 title">
-               			
-               			
-               			
-               			<c:if test="${row.nrealfile ne null}"><i class="bi bi-image"></i></c:if>
-               			${row.ntitle}</td>
+               			<td class="col-5 title"><c:forTokens var="token" items="${row.nrealfile }" delims="." varStatus="status"><c:if test="${status.last}"><c:choose><c:when test="${token eq 'png' || token eq 'jpg' || token eq 'jpeg' || token eq 'bmp' || token eq 'gif' }"><i class="bi bi-image"></i></c:when><c:otherwise><i class="bi bi-file-earmark-richtext"></i></c:otherwise></c:choose></c:if></c:forTokens> ${row.ntitle}</td>
                			<td class="col-3">${row.m_no}</td>
                			<td class="col-3">${row.ndate}</td>
                		</tr></c:forEach>
                		</tbody>
-               </table></c:when><c:otherwise>
-               		<h1>게시판에 글이 없습니다.</h1></c:otherwise></c:choose><c:if test="${sessionScope.mid ne null }">
+               </table></c:when>
+               <c:otherwise>
+               		<h1>게시판에 글이 없습니다.</h1>
+               		</c:otherwise></c:choose><c:if test="${sessionScope.mid ne null }">
                <button type="button" class="btn btn-secondary" onclick="location.href='./mbwrite?board=${param.board}'">글쓰기</button></c:if>
             </div>
         </header>

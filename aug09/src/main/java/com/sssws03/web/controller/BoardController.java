@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.sssws03.web.dto.BoardDTO;
 import com.sssws03.web.service.BoardService;
 
@@ -36,8 +40,8 @@ public class BoardController {
 		//System.out.println(bno);
 		BoardDTO dto = boardService.detail(bno);
 		
-		JSONObject json = new JSONObject();
-		
+		//JSONObject json = new JSONObject();
+		ObjectNode json = JsonNodeFactory.instance.objectNode();
 		//JSONObject e = new JSONObject();
 		
 		json.put("content", dto.getBcontent());
@@ -47,14 +51,7 @@ public class BoardController {
 		//json.put("result", e);
 		//System.out.println(json.toString());
 //{"uuid":"bcf8bec9-3e02-47fd-84fd-af23a9b06c40","content":"<p>저장되나요?저장되나요?저장되나요?<br><\/p>"}
-
-		
-		
-		
 //{"result":{"uuid":"bcf8bec9-3e02-47fd-84fd-af23a9b06c40","content":"<p>저장되나요?저장되나요?저장되나요?<br><\/p>"}}
-		
-		
-		
 //{"dto":"BoardDTO(bno=0, blike=0, commentcount=0, btitle=null, bcontent=<p>저장되나요?저장되나요?저장되나요?<br><\/p>, m_name=null, m_id=null, bdate=null, bip=null, uuid=bcf8bec9-3e02-47fd-84fd-af23a9b06c40)"}
 
 		return json.toString();
@@ -87,6 +84,17 @@ public class BoardController {
 		
 		return "redirect:/board";
 	}
-	
+	@ResponseBody
+	@PostMapping("/detail2")
+	public String detail2(@RequestParam("bno") int bno) throws JsonProcessingException {
+		BoardDTO detail = boardService.detail2(bno);
+		
+		ObjectMapper mapp = new ObjectMapper();
+		String json = mapp.writeValueAsString(detail);
+		System.out.println(json);
+		
+		return json;
+		
+	}
 	
 }
